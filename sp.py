@@ -24,6 +24,7 @@ def speak_to_text() -> str | None:
     except Exception as e:
         print(f"Error: {e}")
     return None
+        
 
 def main() -> None:
     """ for testing only """

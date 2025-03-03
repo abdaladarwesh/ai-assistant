@@ -7,23 +7,26 @@ def main() -> None:
     client = genai.Client(api_key="AIzaSyDfa4uJtXAcQXCmf0pde3D0fbM6_RvvNEM")
     config = types.GenerateContentConfig(max_output_tokens=500, temperature=1)
     while True:
-        content : str | None= speak_to_text()
+        content : str | None = speak_to_text()
         if content == None:
             continue
-        if 'open' in content:
-            print(f"opening{content.replace('open', '')} ......")
-            openingApps(content)
-        elif content == "exit":
-            print("Exiting...")
-            exit()
-        else:
-            respond = client.models.generate_content(model="gemini-2.0-flash", contents=[content], config=config)
-            if respond.candidates:
-                generated_text = respond.candidates[0].content.parts[0].text
-                print("Generated Response:", generated_text)
+        elif 'abido' in content:
+            command = content.replace("abido", "").strip()
+            if 'open' in command:
+                print(f"opening{command.replace('open', '')} ......")
+                openingApps(command)
+            elif command == "exit":
+                print("Exiting...")
+                exit()
             else:
-                print("No response generated.")
-
+                respond = client.models.generate_content(model="gemini-2.0-flash", contents=[command], config=config)
+                if respond.candidates:
+                    generated_text = respond.candidates[0].content.parts[0].text
+                    print("Generated Response:", generated_text)
+                else:
+                    print("No response generated.")
+        else:
+            continue
 
 
 if __name__ == "__main__":
