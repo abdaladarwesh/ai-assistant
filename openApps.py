@@ -2,11 +2,11 @@ import os
 
 def openingApps(name : str) -> None:
     newName : str = name.replace('open', ' ').strip()
-    if newName == 'visualstudiocode' or newName == 'code' or newName == 'vscode':
+    if newName == 'visual studio code' or newName == 'code' or newName == 'vs code':
         print (f"starting visual studio code ...")
         os.startfile(r"C:\Users\Abdallah Darwesh\Desktop\New WinRAR ZIP archive.zip")
-    elif newName == 'visualstudio' or newName == 'visualstudiocommunity' or newName == 'vscommunity' or newName == 'vs':
-        print (f"starting visual studio ...")
+    elif newName == 'visual studio' or newName == 'visual studio community' or newName == 'vs community' or newName == 'vs':
+        print (f"starting visual studio ...{newName}")
         os.startfile(r"C:\Users\Abdallah Darwesh\Desktop\vscommunity.txt")
     elif newName == 'chrome':
         print (f"starting chrome ...")
@@ -22,4 +22,3 @@ def openingApps(name : str) -> None:
         os.startfile(r"C:\Users\Abdallah Darwesh\Desktop\todo.txt")
     else:
         print("wrong app .. ,  please say a valid app to open or if you want to ask ai just say your qusetion")
-

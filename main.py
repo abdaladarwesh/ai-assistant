@@ -24,16 +24,6 @@ def main() -> None:
             else:
                 print("No response generated.")
 
-        print("If you want to continue, say 'continue' or anything else. If you want to exit, say 'exit'.")
-        response = speak_to_text()
-        if response == 'continue':
-            print("You said 'continue'")
-            continue
-        elif response == 'exit':
-            print("Exiting...")
-            exit()
-        else:
-            continue
 
 
 if __name__ == "__main__":

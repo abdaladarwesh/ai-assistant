@@ -1,13 +1,15 @@
 import speech_recognition as sr
+
 def speak_to_text() -> str | None:
     recognizer = sr.Recognizer()
+    recognizer.pause_threshold = 3  # Increase pause threshold to allow longer pauses
 
     try:
         with sr.Microphone() as mic:
             print("Adjusting for ambient noise...")
             recognizer.adjust_for_ambient_noise(mic, duration=1)
             print("Listening...")
-            audio = recognizer.listen(mic, timeout=8, phrase_time_limit=30)
+            audio = recognizer.listen(mic, timeout=50, phrase_time_limit=20)  
             print("Recognizing...")
             text = recognizer.recognize_google(audio)
             text = text.lower()
@@ -23,11 +25,14 @@ def speak_to_text() -> str | None:
         print(f"Error: {e}")
     return None
 
-
-
 def main() -> None:
     """ for testing only """
-    print(speak_to_text())
+    while True:
+        if speak_to_text == "exit":
+            exit()
+        else:
+            print(speak_to_text())
+        
 
 if __name__ == "__main__":
     main()
