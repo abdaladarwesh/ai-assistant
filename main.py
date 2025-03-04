@@ -22,7 +22,7 @@ def main() -> None:
                 respond = client.models.generate_content(model="gemini-2.0-flash", contents=[command], config=config)
                 if respond.candidates:
                     generated_text = respond.candidates[0].content.parts[0].text
-                    print("Generated Response:", generated_text)
+                    print("Abdio:", generated_text)
                 else:
                     print("No response generated.")
         else:
