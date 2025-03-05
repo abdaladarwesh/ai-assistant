@@ -1,10 +1,13 @@
 import speech_recognition as sr
+from playsound import playsound
 import simpleaudio as sa
 import time
 
+PAUSE_THRESHOLD = 3
+
 def listen_for_keyword(keyword: str) -> bool:
     recognizer = sr.Recognizer()
-    recognizer.pause_threshold = 3
+    recognizer.pause_threshold = PAUSE_THRESHOLD
 
     while True:
         try:
@@ -31,31 +34,9 @@ def listen_for_keyword(keyword: str) -> bool:
             print("You didn't say anything for a long time.")
         except sr.RequestError as e:
             print(f"Could not request results from Google Speech Recognition service; {e}")
-        except Exception as e:
-            print(f"Error: {e}")
     return False
 
-def speak_to_text() -> str:
-    recognizer = sr.Recognizer()
-    recognizer.pause_threshold = 3
 
-    try:
-        with sr.Microphone() as mic:
-            print("Adjusting for ambient noise...")
-            recognizer.adjust_for_ambient_noise(mic, duration=1)
-            print("Listening...")
-            audio = recognizer.listen(mic, timeout=10, phrase_time_limit=10)  # adjusted timeouts
-            print("Recognizing...")
-            text = recognizer.recognize_google(audio)
-            text = text.lower()
-            print(f"You: {text}")
-            return text
-    except sr.UnknownValueError:
-        print("Sorry, I did not get that.")
-    except sr.WaitTimeoutError:
-        print("You didn't say anything for a long time.")
-    except sr.RequestError as e:
-        print(f"Could not request results from Google Speech Recognition service; {e}")
-    except Exception as e:
-        print(f"Error: {e}")
-    return ""  # Return an empty string instead of None or undefined variable
+
+
+
