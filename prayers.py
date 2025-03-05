@@ -1,7 +1,5 @@
 import requests
 from datetime import datetime
-from pydub import AudioSegment
-from pydub.playback import play
 import pyttsx3
 import pygame
 
