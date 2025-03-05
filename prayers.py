@@ -65,7 +65,7 @@ def check_prayer_times(prayer = prayers()) -> None:
             elif prayer.get("isha") == current_time:
                 print("Isha Azan time")
                 speak("Isha Azan time")
-                playAudio("sfx.wav")
+                playAudio("azan.mp3")
         except Exception as e:
             print(f"Error playing sound: {e}")
 

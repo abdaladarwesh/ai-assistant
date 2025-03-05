@@ -38,16 +38,16 @@ def main() -> None:
                                 openingApps(appName)
                                 break
                             elif command == "shutdown":
-                                os.system("shutdown /s /t 0")
                                 engine.say("turnoff the pc ...")
+                                os.system("shutdown /s /t 0")
                                 engine.runAndWait()
                             elif command == "sleep":
                                 engine.say("sleeping the pc ...")
                                 engine.runAndWait()
                                 os.system("rundll32.exe powrprof.dll,SetSuspendState 0,1,0")
                             elif command == "restart":
-                                os.system("shutdown /r /t 0")
                                 engine.say("restarting the pc ...")
+                                os.system("shutdown /r /t 0")
                                 engine.runAndWait()
                             else:
                                 respond = client.models.generate_content(model="gemini-2.0-flash", contents=[command], config=config)
