@@ -5,9 +5,6 @@ from speakReco import *
 import os
 from prayers import *
 from datetime import datetime
-from pydub import AudioSegment
-from pydub.playback import play
-import pygame
 
 
 def main() -> None:
