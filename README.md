@@ -22,5 +22,8 @@ A personal AI assistant designed to help with daily tasks using natural language
 3. **Install the required dependencies**:
    ```cmd
    pip install -r requirements.txt
-
+## Usage
+- To start the ai run this command
+  ```cmd
+  python main.py
    
