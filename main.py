@@ -1,6 +1,6 @@
 from google import genai
 from google.genai import types
-from openApps import openingApps
+from openApps import *
 from speakReco import *
 from prayers import *
 from commands import *
@@ -27,13 +27,37 @@ def main() -> None:
                                 speak("Goodbye!")
                                 return
                             elif "open" in command:
-                                appName = command.replace("open", "").strip()
-                                openingApps(appName)
-                                break
+                                if "website" in command:
+                                    openingWeb(command)
+                                    break
+                                else:
+                                    appName = command.replace("open", "").strip()
+                                    openingApps(appName)
+                                    break
+                            elif "google" in command:
+                                google(command)
                             elif command == "shutdown":
                                 engine.say("turnoff the pc ...")
                                 engine.runAndWait()
                                 shutdown()
+                            elif "what can i say" in command:
+                                print(
+                                    "================== Nova commands ==================\n\n",
+                                    "1 - (open APP_NAME) to open an app\n\n",
+                                    "2 - (open WEBSITE_NAME website) to open a specific website\n\n",
+                                    "3 - (google SOMTHING) to google something\n\n",
+                                    "4 - (shutdown , restart , sleep)\n\n",
+                                    "5 - or ask a question immediately to have a response from our generative ai\n\n",
+                                    "============== Enter q to back to the ai ==========\n\n"
+                                )
+                                while True:
+                                    choice : str = input()
+                                    if choice == "q":
+                                        break
+                                    else:
+                                        print ("enter a valid answer")
+                                        continue
+                                break
                             elif command == "sleep":
                                 engine.say("sleeping the pc ...")
                                 engine.runAndWait()
