@@ -15,3 +15,12 @@ A personal AI assistant designed to help with daily tasks using natural language
 
    ```bash
    git clone https://github.com/abdaladarwesh/ai-assistant.git
+2. **Navigate to the project directory**:
+
+   ```cmd
+   cd ai-assistant
+3. **Install the required dependencies**:
+   ```cmd
+   pip install -r requirements.txt
+
+   
