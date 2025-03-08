@@ -39,3 +39,14 @@ def addApps (appname : str) -> None:
         else:
             print("already exist")
 
+def addAppsDefPath (appname : str, dir : str) -> None:
+    with open("appsdirectory.json", "r+") as file:
+        paths = json.load(file)
+        if not checkifexist(appname):
+            paths["apps"].update({appname:dir})
+            file.seek(0)
+            json.dump(paths, file, indent=4)
+            file.truncate()
+        else:
+            print("already exist")
+
