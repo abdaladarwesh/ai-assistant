@@ -1,8 +1,28 @@
 import os
 import pyttsx3
 import webbrowser
+from speakReco import listen, speak
+from addingapps import *
 
 engine = pyttsx3.init()
+
+
+def updateFilePath(newName) -> None:
+            while True:
+                answer = listen()
+                if answer == None:
+                    continue
+                elif "yes" in answer or "yea" in answer:
+                    addApps(newName)
+                    break
+                elif "no" in answer:
+                    break
+                    return
+                else:
+                    print("please say a valid answer")
+                    engine.say("please say a valid answer")
+                    continue
+
 
 
 def openingApps(name : str) -> None:
@@ -11,27 +31,57 @@ def openingApps(name : str) -> None:
         print ("Nova : starting visual studio code ...")
         engine.say ("starting visual studio code ...")
         engine.runAndWait()
-        os.startfile(r"P:\تطبيقات\Microsoft VS Code\Code.exe")
+        path = findPath(newName)
+        if path == None:
+            print("the path to this app is wrong or doesnt exsit do you want to update it ?")
+            speak("the path to this app is wrong or doesnt exsit you want to update it ?")
+            updateFilePath(newName)
+        else:
+            os.startfile(path)
     elif newName == 'visual studio' or newName == 'visual studio community' or newName == 'vs community' or newName == 'vs':
         print (f"Nova : starting visual studio ...")
         engine.say (f"starting visual studio ...")
         engine.runAndWait()
-        os.startfile(r"P:\programmes\visual studio\Common7\IDE\devenv.exe")
+        path = findPath(newName)
+        if path == None:
+            print("the path to this app is wrong or doesnt exsit do you want to update it ?")
+            speak("the path to this app is wrong or doesnt exsit you want to update it ?")
+            updateFilePath(newName)
+        else:
+            os.startfile(path)
     elif newName == 'chrome':
         print (f"Nova : starting chrome ...")
         engine.say (f"starting chrome ...")
         engine.runAndWait()
-        os.startfile(r"C:\Program Files\Google\Chrome\Application\chrome.exe")
+        path = findPath(newName)
+        if path == None:
+            print("the path to this app is wrong or doesnt exsit do you want to update it ?")
+            speak("the path to this app is wrong or doesnt exsit you want to update it ?")
+            updateFilePath(newName)
+        else:
+            os.startfile(path)
     elif newName == 'git':
         print (f"Nova : starting git ...")
         engine.say (f"starting git ...")
         engine.runAndWait()
-        os.startfile(r"P:\programmes\Git\git-bash.exe")
+        path = findPath(newName)
+        if path == None:
+            print("the path to this app is wrong or doesnt exsit do you want to update it ?")
+            speak("the path to this app is wrong or doesnt exsit you want to update it ?")
+            updateFilePath(newName)
+        else:
+            os.startfile(path)
     elif newName == 'todo':
         print (f"Nova : starting todo ...")
         engine.say (f"starting todo ...")
         engine.runAndWait()
-        os.startfile(r"C:\Users\Abdallah Darwesh\Desktop\todo.txt")
+        path = findPath(newName)
+        if path == None:
+            print("the path to this app is wrong or doesnt exsit do you want to update it ?")
+            speak("the path to this app is wrong or doesnt exsit you want to update it ?")
+            updateFilePath(newName)
+        else:
+            os.startfile(path)
     elif newName == 'facebook':
         print (f"Nova : starting {newName} ...")
         engine.say (f"starting {newName} ...")
@@ -83,6 +133,7 @@ def openingApps(name : str) -> None:
         engine.runAndWait()
         webbrowser.open(f"https://keep.google.com/")   
     else:
-        print("wrong app .. ,  please say a valid app to open or if you want to ask ai just say your qusetion")
-        engine.say("wrong app .. ,  please say a valid app to open or if you want to ask ai just say your qusetion")
-        engine.runAndWait()
+        print("wrong app .. ,  do you want to add the app ? say yes or no")
+        speak("wrong app .. ,  do you want to add the app ? say yes or no")
+        updateFilePath(newName)
+
