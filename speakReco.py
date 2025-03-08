@@ -1,7 +1,6 @@
 import speech_recognition as sr
 import pyttsx3
 
-# Initialize recognizer and TTS engine
 recognizer = sr.Recognizer()
 engine = pyttsx3.init()
 
@@ -54,7 +53,7 @@ def main():
     while True:
         command : str = listenForKeyWord()
         if command:
-            if "nova" in command:  # Wake word
+            if "nova" in command:
                 speak("Yes, how can I help?")
                 while True:
                     command : str = listen()

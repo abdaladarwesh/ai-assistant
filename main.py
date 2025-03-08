@@ -2,16 +2,12 @@ from google import genai
 from google.genai import types
 from openApps import openingApps
 from speakReco import *
-import os
 from prayers import *
-from datetime import datetime
-
+from commands import *
 
 def main() -> None:
     client = genai.Client(api_key="AIzaSyDfa4uJtXAcQXCmf0pde3D0fbM6_RvvNEM")
     config = types.GenerateContentConfig(max_output_tokens=100, temperature=1)
-    prayer = prayers()
-    current_time = datetime.now().strftime("%I:%M %p")
 
     while True:
             while True:
@@ -36,16 +32,16 @@ def main() -> None:
                                 break
                             elif command == "shutdown":
                                 engine.say("turnoff the pc ...")
-                                os.system("shutdown /s /t 0")
                                 engine.runAndWait()
+                                shutdown()
                             elif command == "sleep":
                                 engine.say("sleeping the pc ...")
                                 engine.runAndWait()
-                                os.system("rundll32.exe powrprof.dll,SetSuspendState 0,1,0")
+                                sleep()
                             elif command == "restart":
                                 engine.say("restarting the pc ...")
-                                os.system("shutdown /r /t 0")
                                 engine.runAndWait()
+                                restart()
                             else:
                                 respond = client.models.generate_content(model="gemini-2.0-flash", contents=[command], config=config)
                                 if respond.candidates:
