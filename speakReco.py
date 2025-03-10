@@ -1,13 +1,43 @@
 import speech_recognition as sr
-import pyttsx3
+import asyncio
+import wave
+import pygame
+from google import genai
+import os
 
+client = genai.Client(api_key="AIzaSyDfa4uJtXAcQXCmf0pde3D0fbM6_RvvNEM", http_options={'api_version': 'v1alpha'})
+model = "gemini-2.0-flash-exp"
+config = {"response_modalities": ["AUDIO"]}
 recognizer = sr.Recognizer()
-engine = pyttsx3.init()
 
-def speak(text:str) -> None:
+async def speak(text:str) -> None:
+    if os.path.exists("audio.wav"):
+        os.remove("audio.wav")
+    with wave.open("audio.wav", "wb") as wf:
+        wf.setnchannels(1)
+        wf.setsampwidth(2)
+        wf.setframerate(24000)
 
-    engine.say(text)
-    engine.runAndWait()
+        async with client.aio.live.connect(model=model, config=config) as session:
+            await session.send(input=f"say {text} exactly", end_of_turn=True)
+
+            async for response in session.receive():
+                if response.data:
+                    wf.writeframes(response.data)
+
+    # Initialize Pygame and play the audio
+    pygame.mixer.init()
+    pygame.mixer.music.load("audio.wav")
+    pygame.mixer.music.play()
+
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+
+    pygame.mixer.music.stop()  # Stop playing
+    pygame.mixer.quit()        # Release the file
+
+
+
 
 def listenForKeyWord() -> str:
     with sr.Microphone() as source:
@@ -50,24 +80,10 @@ def listen() -> str:
 
 # this block for testing only
 def main():
-    while True:
-        command : str = listenForKeyWord()
-        if command:
-            if "nova" in command:
-                speak("Yes, how can I help?")
-                while True:
-                    command : str = listen()
-                    if command:
-                        if "hello" in command:
-                            speak("Hello! How can I assist?")
-                        elif "exit" in command:
-                            speak("Goodbye!")
-                            return
-                        elif "open" in command:
-                            appName = command.replace("open", "").strip()
-                            if appName == "chrome":
-                                print ("pretend that this is chrome")
-                                break
+    text :str = listen()
+    asyncio.run(speak(text))
+
+
 
 if __name__ == "__main__":
     main()

@@ -2,14 +2,13 @@ import requests
 from datetime import datetime
 import pyttsx3
 import pygame
+from speakReco import *
+import asyncio
 
 engine = pyttsx3.init()
 time = datetime.now().strftime("%I:%M %p")
 
 
-def speak(text:str) -> None:
-    engine.say(text)
-    engine.runAndWait()
 
 url = "https://prayer-times-in-egypt.p.rapidapi.com/prayer?gov=1"
 
@@ -50,19 +49,19 @@ def check_prayer_times(prayer = prayers()) -> None:
         try:
             if prayer.get("dhuhr") == current_time:
                 print("Dhuhr Azan time")
-                speak("Dhuhr Azan time")
+                asyncio.run(speak("Dhuhr Azan time"))
                 playAudio("azan.mp3")
             elif prayer.get("asr") == current_time:
                 print("Asr Azan time")
-                speak("Asr Azan time")
+                asyncio.run(speak("Asr Azan time"))
                 playAudio("azan.mp3")
             elif prayer.get("maghrb") == current_time:
                 print("Maghrib Azan time")
-                speak("Maghrib Azan time")
+                asyncio.run(speak("Maghrib Azan time"))
                 playAudio("azan.mp3")
             elif prayer.get("isha") == current_time:
                 print("Isha Azan time")
-                speak("Isha Azan time")
+                asyncio.run(speak("Isha Azan time"))
                 playAudio("azan.mp3")
         except Exception as e:
             print(f"Error playing sound: {e}")

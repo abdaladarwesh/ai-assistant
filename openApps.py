@@ -1,5 +1,5 @@
 import os
-import pyttsx3
+import asyncio
 import webbrowser
 from speakReco import listen, speak
 from addingapps import *
@@ -7,7 +7,6 @@ from google import genai
 from google.genai import types
 
 
-engine = pyttsx3.init()
 client = genai.Client(api_key="AIzaSyDfa4uJtXAcQXCmf0pde3D0fbM6_RvvNEM")
 config = types.GenerateContentConfig(max_output_tokens=100, temperature=1)
 
@@ -24,7 +23,7 @@ def updateFilePath(newName) -> None:
                     return
                 else:
                     print("please say a valid answer")
-                    engine.say("please say a valid answer")
+                    asyncio.run(speak("please say a valid answer"))
                     continue
 
 
@@ -42,7 +41,7 @@ def openingApps(name : str) -> None:
                 openingApps(newName)
             except:
                 print("wrong app .. ,  do you want to add the app ? say yes or no")
-                speak("wrong app .. ,  do you want to add the app ? say yes or no")
+                asyncio.run(speak("wrong app .. ,  do you want to add the app ? say yes or no"))
                 updateFilePath(newName)
         except Exception as e:
             print (e)

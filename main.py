@@ -4,6 +4,7 @@ from openApps import *
 from speakReco import *
 from prayers import *
 from commands import *
+import asyncio
 
 def main() -> None:
     client = genai.Client(api_key="AIzaSyDfa4uJtXAcQXCmf0pde3D0fbM6_RvvNEM")
@@ -16,15 +17,15 @@ def main() -> None:
             command: str = listenForKeyWord()
             if command:
                 if "nova" in command:
-                    playAudio("sfx.wav")
-                    speak("Yes, how can I help?")
+                    # playAudio("sfx.wav")
+                    asyncio.run(speak("Yes, how can I help?"))
                     while True:
                         command: str = listen()
                         if command:
                             if "hello" in command:
-                                speak("Hello! How can I assist?")
+                                asyncio.run(speak("Hello! How can I assist?"))
                             elif "exit" in command or 'quit' in command:
-                                speak("Goodbye!")
+                                asyncio.run(speak("Goodbye!"))
                                 return
                             elif "open" in command:
                                 if "website" in command:
@@ -37,8 +38,7 @@ def main() -> None:
                             elif "google" in command:
                                 google(command)
                             elif command == "shutdown":
-                                engine.say("turnoff the pc ...")
-                                engine.runAndWait()
+                                asyncio.run(speak("turnoff the pc ..."))
                                 shutdown()
                             elif "what can i say" in command:
                                 print(
@@ -59,19 +59,17 @@ def main() -> None:
                                         continue
                                 break
                             elif command == "sleep":
-                                engine.say("sleeping the pc ...")
-                                engine.runAndWait()
+                                asyncio.run(speak("sleeping the pc ..."))
                                 sleep()
                             elif command == "restart":
-                                engine.say("restarting the pc ...")
-                                engine.runAndWait()
+                                asyncio.run(speak("restarting the pc ..."))
                                 restart()
                             else:
                                 respond = client.models.generate_content(model="gemini-2.0-flash", contents=[command], config=config)
                                 if respond.candidates:
                                     generated_text = respond.candidates[0].content.parts[0].text
                                     print("Nova:", generated_text)
-                                    speak(generated_text)
+                                    asyncio.run(speak(generated_text))
                                     break
 
 if __name__ == "__main__":
