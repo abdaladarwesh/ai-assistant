@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 # Nova (Ai Assistant)
-=======
-
-# AI Assistant
->>>>>>> c5aaa4550fe663fa06f8ae418c5627afe05beb1f
 
 A personal AI assistant designed to help with daily tasks using natural language processing and machine learning.
 
