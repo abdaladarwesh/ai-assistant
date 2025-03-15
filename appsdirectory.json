@@ -1,8 +1,5 @@
 {
     "apps": {
-        "visual studio code": "C:/Users/Abdallah Darwesh/Desktop/gg.txt",
-        "visual studio": "P:/programmes/visual studio/Common7/IDE/devenv.exe",
-        "git": "P:/programmes/Git/git-bash.exe",
-        "chrome": "C:/Program Files/Google/Chrome/Application/chrome.exe "
+        "git": "P:/coding/school project ai/ai-assistant/api.py"
     }
 }

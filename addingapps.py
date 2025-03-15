@@ -4,8 +4,16 @@ import json
 
 def getPath() -> str:
     root = tk.Tk()
+    root.iconbitmap("gg.ico")
     root.withdraw()
     file_path = filedialog.askopenfilename(title="Select a file")
+    return file_path
+
+def getPathdir() -> str:
+    root = tk.Tk()
+    root.withdraw()
+    root.iconbitmap("gg.ico")
+    file_path = filedialog.askdirectory(title="Select a file")
     return file_path
 
 def checkifexist(appname: str) -> bool:
@@ -32,6 +40,17 @@ def addApps (appname : str) -> None:
     with open("appsdirectory.json", "r+") as file:
         paths = json.load(file)
         if not checkifexist(appname):
+            paths["apps"].update({appname:dir})
+            file.seek(0)
+            json.dump(paths, file, indent=4)
+            file.truncate()
+        else:
+            print("already exist")
+def updateApps (appname : str) -> None:
+    dir = getPath()
+    with open("appsdirectory.json", "r+") as file:
+        paths = json.load(file)
+        if checkifexist(appname):
             paths["apps"].update({appname:dir})
             file.seek(0)
             json.dump(paths, file, indent=4)

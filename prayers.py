@@ -4,6 +4,7 @@ import pyttsx3
 import pygame
 from speakReco import *
 import asyncio
+from notification import *
 
 engine = pyttsx3.init()
 time = datetime.now().strftime("%I:%M %p")
@@ -48,23 +49,23 @@ def check_prayer_times(prayer = prayers()) -> None:
         current_time = datetime.now().strftime("%I:%M %p")
         try:
             if prayer.get("dhuhr") == current_time:
-                print("Dhuhr Azan time")
+                noti("Dhuhr Azan time")
                 asyncio.run(speak("Dhuhr Azan time"))
                 playAudio("azan.mp3")
             elif prayer.get("asr") == current_time:
-                print("Asr Azan time")
+                noti("Asr Azan time")
                 asyncio.run(speak("Asr Azan time"))
                 playAudio("azan.mp3")
             elif prayer.get("maghrb") == current_time:
-                print("Maghrib Azan time")
+                noti("Maghrib Azan time")
                 asyncio.run(speak("Maghrib Azan time"))
                 playAudio("azan.mp3")
             elif prayer.get("isha") == current_time:
-                print("Isha Azan time")
+                noti("Isha Azan time")
                 asyncio.run(speak("Isha Azan time"))
                 playAudio("azan.mp3")
         except Exception as e:
-            print(f"Error playing sound: {e}")
+            noti(f"Error playing sound: {e}")
 
 #'Ishraq': '4:50 ص', 
 # 'Dhuhr': '6:16 ص', 

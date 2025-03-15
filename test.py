@@ -1,7 +1,9 @@
 import requests
 
-url : str = "http://127.0.0.1:5000/open"
+url : str = "http://127.0.0.1:5000/"
 
-response = requests.put(url, {"app name" : "whatsapp"})
+# app = requests.put(url + "open", json={"appname" : "git"})
+command = requests.put(url + "command", json={"command" : "sleep"})
 
-print(response.json())
+# print(app.json())
+print(command.json())

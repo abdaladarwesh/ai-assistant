@@ -5,6 +5,7 @@ from speakReco import listen, speak
 from addingapps import *
 from google import genai
 from google.genai import types
+from notification import *
 
 
 client = genai.Client(api_key="AIzaSyDfa4uJtXAcQXCmf0pde3D0fbM6_RvvNEM")
@@ -17,12 +18,12 @@ def updateFilePath(newName) -> None:
                 if answer == None:
                     continue
                 elif "yes" in answer or "yea" in answer:
-                    addApps(newName)
+                    updateApps(newName)
                     break
                 elif "no" in answer:
                     return
                 else:
-                    print("please say a valid answer")
+                    noti("please say a valid answer")
                     asyncio.run(speak("please say a valid answer"))
                     continue
 
@@ -31,7 +32,13 @@ def openingApps(name : str) -> None:
     newName : str = name.replace('open', ' ').strip()
     if checkifexist(newName):
         path = findPath(newName)
-        os.startfile(path)
+        try:
+            os.startfile(path)
+        except:
+            noti("wrong app .. ,  do you want to add the app ? say yes or no")
+            asyncio.run(speak("wrong app .. ,  do you want to add the app ? say yes or no"))
+            updateFilePath(newName)
+
     else :
         respond = client.models.generate_content(model="gemini-2.0-flash", contents=[f"what is the original path to {newName} in windows using forward slash return the path only without any extra talk"], config=config)
         defPath = respond.candidates[0].content.parts[0].text.replace("\n", " ")
@@ -40,11 +47,11 @@ def openingApps(name : str) -> None:
             try:
                 openingApps(newName)
             except:
-                print("wrong app .. ,  do you want to add the app ? say yes or no")
+                noti("wrong app .. ,  do you want to add the app ? say yes or no")
                 asyncio.run(speak("wrong app .. ,  do you want to add the app ? say yes or no"))
                 updateFilePath(newName)
         except Exception as e:
-            print (e)
+            noti (e)
              
 def openingWeb(name : str) -> None:
     newName : str = name.replace('open', ' ').replace("website"," ").strip()
@@ -59,3 +66,5 @@ def google(name : str) -> None:
     webbrowser.open_new_tab(f"https://www.google.com/search?q={newName}")
          
 
+def main() -> None:
+    openingApps('git')

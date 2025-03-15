@@ -1,3 +1,7 @@
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "1"  # Hide welcome message  
+import warnings
+import asyncio
 from google import genai
 from google.genai import types
 from openApps import *
@@ -5,10 +9,13 @@ from speakReco import *
 from prayers import *
 from commands import *
 import asyncio
-
+from notification import *
+from showCommands import *
 def main() -> None:
+    warnings.filterwarnings("ignore", category=UserWarning)
+    asyncio.run(asyncio.sleep(0))  # Ensures the async loop is initialized properly
     client = genai.Client(api_key="AIzaSyDfa4uJtXAcQXCmf0pde3D0fbM6_RvvNEM")
-    config = types.GenerateContentConfig(max_output_tokens=100, temperature=1)
+    config = types.GenerateContentConfig(temperature=1, max_output_tokens=1000)
 
     while True:
             while True:
@@ -29,41 +36,38 @@ def main() -> None:
                                 return
                             elif "open" in command:
                                 if "website" in command:
+                                    asyncio.run(speak("opening" + command.replace("open", " ")))
                                     openingWeb(command)
                                     break
                                 else:
                                     appName = command.replace("open", "").strip()
+                                    asyncio.run(speak("opening" + appName))
                                     openingApps(appName)
                                     break
                             elif "google" in command:
+                                asyncio.run(speak("googleing" + command.replace("google", " ")))
                                 google(command)
+                                break
                             elif command == "shutdown":
                                 asyncio.run(speak("turnoff the pc ..."))
                                 shutdown()
                             elif "what can i say" in command:
-                                print(
-                                    "================== Nova commands ==================\n\n",
-                                    "1 - (open APP_NAME) to open an app\n\n",
-                                    "2 - (open WEBSITE_NAME website) to open a specific website\n\n",
-                                    "3 - (google SOMTHING) to google something\n\n",
-                                    "4 - (shutdown , restart , sleep)\n\n",
-                                    "5 - or ask a question immediately to have a response from our generative ai\n\n",
-                                    "============== Enter q to back to the ai ==========\n\n"
-                                )
-                                while True:
-                                    choice : str = input()
-                                    if choice == "q":
-                                        break
-                                    else:
-                                        print ("enter a valid answer")
-                                        continue
+                                showingCommands()
                                 break
                             elif command == "sleep":
                                 asyncio.run(speak("sleeping the pc ..."))
                                 sleep()
+                                break
                             elif command == "restart":
                                 asyncio.run(speak("restarting the pc ..."))
                                 restart()
+                                break
+                            elif "fold" in command or command == "make folder":
+                                makedir()
+                                break
+                            elif "alaram" in command or "timer" in command:
+                                alarm()
+                                break
                             else:
                                 respond = client.models.generate_content(model="gemini-2.0-flash", contents=[command], config=config)
                                 if respond.candidates:
