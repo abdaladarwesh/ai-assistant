@@ -73,7 +73,7 @@ def listen() -> str:
         print("Adjusting for ambient noise....")
         recognizer.adjust_for_ambient_noise(source)
         noti("Listening...")
-        audio = recognizer.listen(source, timeout=5)
+        audio = recognizer.listen(source, phrase_time_limit=25)
     
     try:
         print("Recognizing...")
