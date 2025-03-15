@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 # Nova (Ai Assistant)
+=======
+
+# AI Assistant
+>>>>>>> c5aaa4550fe663fa06f8ae418c5627afe05beb1f
 
 A personal AI assistant designed to help with daily tasks using natural language processing and machine learning.
 
@@ -49,3 +54,19 @@ A personal AI assistant designed to help with daily tasks using natural language
 
 
 
+<<<<<<< HEAD
+=======
+   ```bash
+   git clone https://github.com/abdaladarwesh/ai-assistant.git
+2. **Install the required dependencies**:
+   ```cmd
+   pip install -r requirements.txt
+3. **Navigate to the project directory**:
+   ```cmd
+   cd ai-assistant
+## Usage
+- to use the ai run this command
+
+   ```cmd
+   python main.py
+>>>>>>> c5aaa4550fe663fa06f8ae418c5627afe05beb1f
