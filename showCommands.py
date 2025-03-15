@@ -31,7 +31,11 @@ def showingCommands() -> None:
         "2 - \"open website\"  To open a specific website\n\n"
         "3 - \"google\"  To google something\n\n"
         "4 - \"shutdown , restart , sleep\"\n\n"
-        "5 - or ask a question immediately to have a response from our generative AI\n\n"
+        "5 - \"What can i say\" To show the commands that you can say\n\n"
+        "6 - \"Make a folder\" To make a folder in a specific place\n\n"
+        "7 - \"Make an alarm\" or \"Make a timer\" to open the Clock app\n\n"
+        "8 - or ask a question immediately to have a response from our generative AI\n\n"
+
     )
 
     text_label = ttk.Label(frame, text=text, style="TLabel", wraplength=450, anchor="w", justify="left")
@@ -39,4 +43,6 @@ def showingCommands() -> None:
 
     root.mainloop()
 
+if __name__ == "__main__":
+    showingCommands()
 

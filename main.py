@@ -1,5 +1,5 @@
 import os
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "1"  # Hide welcome message  
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "1"
 import warnings
 import asyncio
 from google import genai
