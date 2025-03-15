@@ -13,7 +13,6 @@ from notification import *
 from showCommands import *
 def main() -> None:
     warnings.filterwarnings("ignore", category=UserWarning)
-    asyncio.run(asyncio.sleep(0))  # Ensures the async loop is initialized properly
     client = genai.Client(api_key="AIzaSyDfa4uJtXAcQXCmf0pde3D0fbM6_RvvNEM")
     config = types.GenerateContentConfig(temperature=1, max_output_tokens=1000)
 
