@@ -48,12 +48,12 @@ def main() -> None:
                                 asyncio.run(speak("googleing" + command.replace("google", " ")))
                                 google(command)
                                 break
-                            elif command == "shutdown":
-                                asyncio.run(speak("turnoff the pc ..."))
-                                shutdown()
                             elif "what can i say" in command:
                                 showingCommands()
                                 break
+                            elif command == "shutdown":
+                                asyncio.run(speak("turnoff the pc ..."))
+                                shutdown()
                             elif command == "sleep":
                                 asyncio.run(speak("sleeping the pc ..."))
                                 sleep()

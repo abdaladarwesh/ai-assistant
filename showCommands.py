@@ -34,7 +34,8 @@ def showingCommands() -> None:
         "5 - \"What can i say\" To show the commands that you can say\n\n"
         "6 - \"Make a folder\" To make a folder in a specific place\n\n"
         "7 - \"Make an alarm\" or \"Make a timer\" to open the Clock app\n\n"
-        "8 - or ask a question immediately to have a response from our generative AI\n\n"
+        "8 - \"Organize\" to organize a specific folder\n\n"
+        "9 - or ask a question immediately to have a response from our generative AI\n\n"
 
     )
 
