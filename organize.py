@@ -12,7 +12,7 @@ def organize_files(directory):
         "Documents": [".pdf", ".doc", ".docx", ".txt", ".xlsx", ".pptx"],
         "Videos": [".mp4", ".mkv", ".avi", ".mov"],
         "Audio": [".mp3", ".wav", ".aac", ".flac"],
-        "Archives": [".zip", ".rar", ".tar", ".gz"],
+        "Archives": [".zip", ".rar", ".tar", ".gz",".7z"],
         "Scripts": [".py", ".js", ".bat", ".sh"]
     }
 
@@ -21,14 +21,22 @@ def organize_files(directory):
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
+    others_folder = os.path.join(directory, "Others")
+    if not os.path.exists(others_folder):
+        os.makedirs(others_folder)
+
     for file in os.listdir(directory):
         file_path = os.path.join(directory, file)
         if os.path.isfile(file_path):
             file_ext = os.path.splitext(file)[1].lower()
+            moved = False
             for folder, extensions in file_types.items():
                 if file_ext in extensions:
                     shutil.move(file_path, os.path.join(directory, folder, file))
+                    moved = True
                     break
+            if not moved:
+                shutil.move(file_path, os.path.join(others_folder, file))
     
     # Organize folders
     folder_category = "Folders"
@@ -38,11 +46,10 @@ def organize_files(directory):
 
     for item in os.listdir(directory):
         item_path = os.path.join(directory, item)
-        if os.path.isdir(item_path) and item not in file_types.keys() and item != folder_category:
+        if os.path.isdir(item_path) and item not in file_types.keys() and item != folder_category and item != "Others":
             shutil.move(item_path, os.path.join(folder_category_path, item))
 
     print("Files and folders organized successfully!")
-
 
 if __name__ == "__main__":
     path = getPathdir()
