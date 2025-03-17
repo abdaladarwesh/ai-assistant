@@ -11,6 +11,7 @@ from commands import *
 import asyncio
 from notification import *
 from showCommands import *
+from organize import *
 def main() -> None:
     warnings.filterwarnings("ignore", category=UserWarning)
     client = genai.Client(api_key="AIzaSyDfa4uJtXAcQXCmf0pde3D0fbM6_RvvNEM")
@@ -67,6 +68,9 @@ def main() -> None:
                             elif "alaram" in command or "timer" in command:
                                 alarm()
                                 break
+                            elif command == "organize":
+                                path = getPathdir()
+                                organize_files(path)
                             else:
                                 respond = client.models.generate_content(model="gemini-2.0-flash", contents=[command], config=config)
                                 if respond.candidates:
